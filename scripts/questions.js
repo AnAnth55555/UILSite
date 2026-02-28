@@ -21,7 +21,7 @@ const quizType = urlParams.get('type');
  * Global question list populated based on url quiz type
  * @type {Question[]} 
  */
-window.questions = [];
+window.questions = []; 
 
 // The question set for the tracing problems
 if (quizType === "Tracing") {
@@ -264,98 +264,7 @@ public static int method(int[][] m) {
             },
             level: 'Invitational',
             correctAnswer: 'd'
-        },
-        // 2023 District
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int T = 12;
-if (T > 10)
-    T = T - 3;
-if (T == 12)
-    T *= 2;
-else
-    T /= 2;
-if (T - 10 < 0)
-    T++;
-else
-    T--;
-out.print(T);
-`,
-            answers: {
-                a: '3',
-                b: '4',
-                c: '5',
-                d: '19',
-                e: '25'
-            },
-            level: 'District',
-            correctAnswer: 'c'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String St = "A BC DEF GH I JK LMN O";
-Scanner B = new Scanner(St);
-for(int x=0; x<=2; x++)
-{
-    B.next();
-    out.print(B.next());
-}
-`,
-            answers: {
-                a: 'ABCDEFGH',
-                b: 'BCGHJK',
-                c: 'BCGHJKO',
-                d: 'ADEFILMN',
-                e: 'ADEFI'
-            },
-            level: 'District',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-boolean[] F = new boolean[20];
-F[1] = true;
-for(int x=2; x<=19; x++)
-    F[x] = F[x-1] ^ F[x-2];
-int C = 0;
-for (int x=0; x<=19; x++)
-    if (F[x])
-        C++;
-out.print(C);
-`,
-            answers: {
-                a: '0',
-                b: '6',
-                c: '10',
-                d: '13',
-                e: '20'
-            },
-            level: 'District',
-            correctAnswer: 'd'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int L = 512;
-int M = L / 100;
-int N = (L - M * 100) / 10;
-int R = L % 10;
-int U = R*100 + M*10 + N;
-out.print(U);
-`,
-            answers: {
-                a: '0',
-                b: '9',
-                c: '16',
-                d: '22',
-                e: '25'
-            },
-            level: 'District',
-            correctAnswer: 'd'
-        },
+        }
     ]
 }
 
@@ -364,14 +273,46 @@ out.print(U);
 if (quizType === "Recursion") {
     window.questions = [
         {
-            question: 'Recursion question goes here:',
+            question: 'What is returned by the method call accumulate(4)?',
+            code:
+                public static int accumulate(int n) {
+                    if (n == 0)
+                        return 5;
+                    else
+                        return n + accumulate(n - 1);
+                }
+                ,
             answers: {
-                a: 'yes!!!',
-                b: 'no.',
-                c: 'maybe?'
+                a: '10',
+                b: '15',
+                c: '20',
+                d: '14',
+                e: '9',
             },
-            correctAnswer: 'c'
-        }
+            level: 'Invitational',
+            correctAnswer: 'b'
+        },
+        {
+            question: 'What is output by the call process("UIL")?',
+            code:
+                public static void process(String s) {
+                    if (s.length() <= 1) {
+                        System.out.print(s);
+                    } else {
+                        process(s.substring(1));
+                        System.out.print(s.charAt(0));
+                    }
+                ,
+            answers: {
+                a: 'UIL',
+                b: 'LIU',
+                c: 'UII',
+                d: 'LLU',
+                e: 'ULL',
+            },
+            level: 'Invitational',
+            correctAnswer: 'b'
+        },
     ]
 }
 
