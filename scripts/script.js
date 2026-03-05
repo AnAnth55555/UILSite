@@ -124,13 +124,14 @@ window.onload = function () {
             questions.push(window.questions[q]); 
         }
     }
-
     if (questions.length === 0) {
         this.alert("404 - Topic Type Not Found! :(");
         window.location.href = "index.html";
     } else {
         questions = shuffleQuestions(questions);
     }
+
+    this.document.title = "UIL - Training " + quizType; 
 
     const quizContainer = this.document.getElementById("quizContainer");
     const submitButton = this.document.getElementById("submitButton");
