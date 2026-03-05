@@ -10,8 +10,17 @@
  * @property {string} question - The question text for the problem
  * @property {string} [code] - Optional code snippet paired alongside the question
  * @property {Answers} answers - Answer choices keyed by id
- * @property {string} [level] - Optional level of the problem (district, invitational, etc)
  * @property {string} correctAnswer - The id of the correct answer
+ * @property {string} [level] - Optional level of the problem (district, invitational, etc)
+ * @property {string[]} tags - The tags of the question.
+ * Current Tags Include: 
+ * 1. Tracing - Problems that require in depth tracing of algorithms.
+ * 2. Recursion - Problems that require a recursive approach (function calls itself)
+ * 3. Numbers - Problems involving mathematical reasoning or general number concepts.
+ * 4. Boolean - Problems involving boolean logic and algebra.
+ * 5. Misc. - Problems that are ultra-specific and do not fall into any other category. 
+ * ___
+ * If you need a new tag, please update the jsDoc to reflect it. 
  */
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -21,1158 +30,590 @@ const quizType = urlParams.get('type');
  * Global question list populated based on url quiz type
  * @type {Question[]} 
  */
-window.questions = [];
-
-// The question set for the tracing problems
-if (quizType === "Tracing") {
-    window.questions = [
-        // 2018 District
-        {
-            question: 'What is the output of the code segment to the right?',
-            code: `
-        boolean yes=false,no=true,maybe=true;
-        if(yes)
-            out.print("no ");
-        else if(no)
-            out.print("yes ");
-        else if(maybe)
-            out.print("yes and no ");
-        else
-            out.print("maybe");
+window.questions = [
+    // 2018 State
+    {
+        question: "What is the output of the code segment shown on the right?",
+        code: `out.print(0b10101010%0b00001111);`,
+        answers: {
+            a: "10",
+            b: "11",
+            c: "5",
+            d: "6",
+            e: "-11",
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Numbers", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right?",
+        code: `out.println(5%4+8-2*3);`,
+        answers: {
+            a: "21",
+            b: "19",
+            c: "10",
+            d: "3",
+            e: "15",
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Numbers", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right? Astericks indicate blank spaces.",
+        code: `out.printf("%7.5s","85.4697294");`,
+        answers: {
+            a: "**85.46",
+            b: "85.46973",
+            c: "85.4697",
+            d: "Error. Will not compile",
+            e: "Error. Throws an IllegalFormatConversionException",
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Misc", "Printf"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right? Astericks indicate blank spaces.",
+        code: `
+String s="feels like summer";
+String t=s.substring(s.indexOf("u")).concat(s.substring(1, 4));
+out.print(t);
+        `,
+        answers: {
+            a: "mmereel",
+            b: "ummereel",
+            c: "mmerfeel",
+            d: "eelummer",
+            e: "ummerfeel",
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Misc", "String"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right? Astericks indicate blank spaces.",
+        code: `
+boolean a=true,b=true;
+out.print((a^b)==((a||b)&&!(a&&b)));
+        `,
+        answers: {
+            a: "true",
+            b: "false",
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Boolean"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right? Astericks indicate blank spaces.",
+        code: `
+out.print(Math.round(Math.E));
+        `,
+        answers: {
+            a: "0",
+            b: "1",
+            c: "2",
+            d: "3",
+            e: "4",
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Number"]
+    },
+    {
+        question: "Given the code segment shown on the right, which of the following additional lines of code will compile and execute correctly?",
+        code: `
+int w=9;
+long x=8;
+double y=3.5;
+float z=4.15f;
+        `,
+        answers: {
+            a: "double a=w+x+y+z;",
+            b: "float b=w+x+y+z;",
+            c: "long c=w+x+y+z;",
+            d: "int d=w+x+y+z;",
+            e: "More than one of the above.",
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Number", "Types"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+int m=10,n=-8,p=2;
+if(m<n&&p==n/2)
+    if(m>0||p==2)
+        out.print("A");
+    else
+        out.print("B");
+else
+    if(n<=-8^p*m==20)
+        out.print("C");
+    else
+        out.print("D");
+        `,
+        answers: {
+            a: "A",
+            b: "AC",
+            c: "C",
+            d: "B",
+            e: "More than one of the above.",
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+String s="upallnight";
+int i=s.length();
+do {
+    out.print(s.charAt(i));
+    i--;
+}while(i>0);
+        `,
+        answers: {
+            a: "thginllap",
+            b: "upallnight",
+            c: "thginllapu",
+            d: "hginllapu",
+            e: "There is no output due to an error.",
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Tracing", "String"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+boolean[] ba=new boolean[10];
+for(int x=1;x<ba.length;x+=2)
+    ba[x]=true;
+int y=0;
+for(int x=0;x<ba.length;x++)
+    if(ba[x])
+        y++;
+out.print(y);
 
         `,
-            answers: {
-                a: 'yes',
-                b: 'no',
-                c: 'yes and no',
-                d: 'yes yes and no'
-            },
-            level: 'District',
-            correctAnswer: 'a'
+        answers: {
+            a: "0",
+            b: "10",
+            c: "5",
+            d: "11",
+            e: "6",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String s="planet";
-String t="moon";
-String u=s.substring(1, 2)+t.substring(1);
-out.print(u);
-`,
-            answers: {
-                a: 'laoon',
-                b: 'ploon',
-                c: 'lmoon',
-                d: 'plmoon',
-                e: 'loon'
-            },
-            level: 'District',
-            correctAnswer: 'e'
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "Which of the following must replace <code> to ensure that the main method will compile and that when executed the user can type in their first and last name from the keyboard?",
+        code: `
+import static java.lang.System.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Q11 {
+    public static void main(String[] args) {
+        <code>
+        out.print("First Name: ");
+        String fn=s.next();
+        out.print("Last Name: ");
+        String ln=s.next();
+    }
+}
+        `,
+        answers: {
+            a: "Scanner s=new Scanner(System);",
+            b: "Scanner s=new Scanner(in);",
+            c: `Scanner s=new Scanner(new File("in");`,
+            d: `Scanner s=new Scanner("System.in");`,
+            e: "None of the above.",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-char c='A';
-int i=8;
-double d=4.65;
-out.print(c+i-d);
-`,
-            answers: {
-                a: '68.0',
-                b: 'D',
-                c: '68',
-                d: '68.35'
-            },
-            level: 'District',
-            correctAnswer: 'd'
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+int s=0;
+for(int x=20;x>0;x--) {
+    if(x%3==0)
+        s-=x;
+    if(x%2!=0)
+        s+=x;
+    }
+out.print(s);
+
+        `,
+        answers: {
+            a: "-47",
+            b: "47",
+            c: `37`,
+            d: `-37`,
+            e: "-10",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-double d=0;
-int i=10;
-do {
-    d+=--i;
-}while(i>0);
-out.print(d+" "+i)
-`,
-            answers: {
-                a: '44.0 1',
-                b: '55.0 1',
-                c: '45.0 1',
-                d: '55.0 0',
-                e: '45.0 0'
-            },
-            level: 'District',
-            correctAnswer: 'e'
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+int x=-5;
+x=~-++x;
+out.print(x);
+        `,
+        answers: {
+            a: "-5",
+            b: "-6",
+            c: `5`,
+            d: `6`,
+            e: "Error. Will not compile.",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-public static String rec(String s,int i) {
-    if(s.length()==1)
-        return s;
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Tracing", "Number", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+out.print(Character.SIZE);
+        `,
+        answers: {
+            a: "8",
+            b: "65536",
+            c: `32`,
+            d: `16`,
+            e: "64",
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+ArrayList<String> a=new 
+ArrayList<String>();
+a.add("Dalhart");
+a.add("Dumas");
+a.add("Muleshoe");
+a.add("Earth");
+a.remove(1);
+out.println(a.remove("Dumas"));
+        `,
+        answers: {
+            a: "Dumas",
+            b: "-1",
+            c: `true`,
+            d: `false`,
+            e: "There is no output due to an error.",
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+ArrayList<String> a=new 
+ArrayList<String>();
+a.add("Dalhart");
+a.add("Dumas");
+a.add("Muleshoe");
+a.add("Earth");
+a.remove(1);
+out.println(a.remove("Dumas"));
+        `,
+        answers: {
+            a: "Dumas",
+            b: "-1",
+            c: `true`,
+            d: `false`,
+            e: "There is no output due to an error.",
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "Which of the following cannot be modified using final?",
+        answers: {
+            a: "class",
+            b: "constructor",
+            c: `method`,
+            d: `field`,
+            e: "All of the above can be modified with final.",
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "When the code segment shown on the right has been executed which of the following statements is true about the set s?",
+        code: `
+Random r=new Random();
+Set<Integer> s=new TreeSet<Integer>();
+for(int x=1;x<=1000;x++)
+    s.add((r.nextInt(10)+10)*2);
+        `,
+        answers: {
+            a: "s contains only even numbers from 20 to 38 inclusive.",
+            b: "s contains only odd numbers from 21 to 39 inclusive.",
+            c: `s contains 1000 different random numbers.`,
+            d: `s contains all of the numbers from 20 to 38 inclusive.`,
+            e: "s contains only even numbers from 10 to 40 exclusive.",
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Data Structures", "Number"]
+    },
+    {
+        question: "Which of the following can correctly replace <code> in the code segment shown on the right?",
+        code: `
+Scanner s=new Scanner("2 12 6 8 1");
+int sum=0;
+while(s.hasNext())
+    sum+=s.<code>;
+out.print(sum);
+        `,
+        answers: {
+            a: "nextInt()",
+            b: "nextDouble()",
+            c: `next()`,
+            d: `nextFloat()`,
+            e: "More than one of the above.",
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Number", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment shown?",
+        code: `
+String s="uil.academics@uiltexas.org";
+out.print(s.matches(".+"));
+out.print(s.matches("\\S{3}.\\D+@[a-z]+.\\w{3}"));
+out.print(s.matches("uil\\.?\\S*@+uiltexas.org"));
+        `,
+        answers: {
+            a: "falsefalsetrue",
+            b: "falsetruetrue",
+            c: `truefalsetrue`,
+            d: `truetruetrue`,
+            e: "falsefalsefalse",
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["String", "Misc"]
+    },
+     {
+        question: "What is the output of line #1 in the code segment shown on the right?",
+        code: `
+TreeMap<Integer,Integer> tm=new 
+TreeMap<Integer,Integer>();
+tm.put(225, 1);
+tm.put(541, 2);
+tm.put(102, 4);
+tm.put(312, 3);
+tm.put(299, 2);
+out.println(tm);//line #1
+int i=tm.ceilingEntry(300).getValue();
+out.print(i);//line #2
+        `,
+        answers: {
+            a: "{102=4, 225=1, 299=2, 312=3, 541=2}",
+            b: "{225=1, 541=2, 299=2, 312=3, 102=4}",
+            c: `{225=1, 541=2, 102=4, 312=3, 299=2}`,
+            d: `{102, 225, 299, 312, 541}`,
+            e: "{1, 2, 2, 3, 4}",
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "What is the output of line #2 in the code segment shown on the right?",
+        code: `
+TreeMap<Integer,Integer> tm=new 
+TreeMap<Integer,Integer>();
+tm.put(225, 1);
+tm.put(541, 2);
+tm.put(102, 4);
+tm.put(312, 3);
+tm.put(299, 2);
+out.println(tm);//line #1
+int i=tm.ceilingEntry(300).getValue();
+out.print(i);//line #2
+        `,
+        answers: {
+            a: "2",
+            b: "3",
+            c: `312`,
+            d: `299`,
+            e: "300",
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "What is printed by the main method shown on the right?",
+        code: `
+public static void main(String[] args) {
+    long n=4;
+    out.print(f(n));
+}
+public static long f(long n) {
+    if(n<=1)
+        return 1;
     else
-        return s+rec(s.substring(0,i),i-1);
+    return 5+f(n-1)+f(n-2);
 }
-//client code
-String s="Pecos";
-out.print(rec(s,s.length()-1))
-`,
-            answers: {
-                a: 'PecosPecoPecPe',
-                b: 'PPePecPecoPecos',
-                c: 'PecosPecoPecPeP',
-                d: 'PePcePocePsoceP',
-                e: 'PPPPP'
-            },
-            level: 'District',
-            correctAnswer: 'c'
+        `,
+        answers: {
+            a: "45",
+            b: "20",
+            c: `43`,
+            d: `13`,
+            e: "25",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int[][] mat= new int[4][4];
-for(int x=0;x<4;x++)
-    for(int y=0;y<4;y++)
-        mat[y][x]=x+2*y;
-out.println(Arrays.toString(mat[2]));
-`,
-            answers: {
-                a: '[4, 5, 6, 7]',
-                b: '[2, 3, 4, 5]',
-                c: '[2, 4, 6, 8]',
-                d: '[1, 3, 5, 7]',
-                e: '[6, 7, 8, 9]'
-            },
-            level: 'District',
-            correctAnswer: 'a'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-Double d1=new Double(18.99);
-Double d2=19.00;
-if(d1.compareTo(d2)==0)
-    out.print("Go");
-else if(d1.compareTo(d2)>0)
-    out.print("Fight");
-else
-    out.print("Win");
-`,
-            answers: {
-                a: 'Go',
-                b: 'Fight',
-                c: 'Win',
-                d: 'Error. Will not compile.',
-                e: 'Error. Throws a run time exception'
-            },
-            level: 'District',
-            correctAnswer: 'c'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String s="March2018",t="";
-for(int i=0;i<s.length();i++) {
-    switch(s.substring(i, i+1)) {
-    case "M":t+="#";break;
-    case "c":t+="*";
-    case "0":t+="%";break;
-    case "r":
-    case "1":
-    case "8":t+="&";break;
-    default:t+="@";
-    }
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Recursion"]
+    },
+    {
+        question: "Which of the following best describes the error within the interface shown to the right?",
+        code: `
+public interface Shape {
+ public double area();
+ public double perimeter();
 }
-out.print(t);
-`,
-            answers: {
-                a: '#@&*%@@%&&',
-                b: '#@&*@@%&&',
-                c: '#@@*%@@%@&',
-                d: '#@@*@@%@&',
-                e: '#&*%%&&'
-            },
-            level: 'District',
-            correctAnswer: 'a'
+        `,
+        answers: {
+            a: "The signature must contain the keyword implements.",
+            b: "The interface does not contain a constructor.",
+            c: `The area and perimeter methods must be implemented.`,
+            d: `Shape must be declared as final and contain fields that are declared as final.`,
+            e: "There are no errors in the code shown. The interface Shape will compile and execute as intended.",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String s="JAVA",t="java";
-if(s.equals(t))
-    out.print("penny ");
-else if(s.equals("java"))
-    out.print("nickel ");
-else if(t.equalsIgnoreCase(s))
-    out.print("dime ");
-else if(t.equals("java"))
-    out.print("quarter");
-`,
-            answers: {
-                a: 'penny',
-                b: 'nickel',
-                c: 'penny nickel dime quarter',
-                d: 'dime',
-                e: 'dime quarter'
-            },
-            level: 'Invitational',
-            correctAnswer: 'd'
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Misc", "Inheritance"]
+    },
+    {
+        question: "Which of the following statements is false?",
+        answers: {
+            a: "An object cannot be instantiated from an abstract class.",
+            b: "It is possible to define an abstract class that does not contain any abstract methods.",
+            c: `A subclass can extend multiple abstract classes.`,
+            d: `A subclass can be abstract even if its superclass is concrete.`,
+            e: "A class that contains abstract methods must be abstract.",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int m=10,n=1,p=1;
-while(m>0) {
-    p=p+n*m;
-    n++;
-    m-=2;
-}
-out.print(p);
-`,
-            answers: {
-                a: '71',
-                b: '61',
-                c: '57',
-                d: '70',
-                e: '45'
-            },
-            level: 'Invitational',
-            correctAnswer: 'a'
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Misc", "Inheritance"]
+    },
+    {
+        question: "What is the run time efficiency (Big O value) of the segment of code shown on the right?",
+        answers: {
+            a: "O(n log n)",
+            b: "O(x log y)",
+            c: `O(log n)`,
+            d: `O(n^2)`,
+            e: "O(n^x log y)",
         },
-        {
-            question: "Which of the following best describes the method shown on the right?",
-            code: `
-public static int method(int[][] m) {
-    int a=0;
-    for(int x=0;x<m.length;x++) {
-        int r=0;
-        for(int y=0;y<m[x].length;y++)
-            if(m[x][y]>r)
-                r=m[x][y];
-        a+=r;
-    }
-    return a;
-}
-`,
-            answers: {
-                a: 'Returns the sum of the values in the diagonal rows in array m',
-                b: 'Returns the largest value in array m.',
-                c: 'Returns the sum of all of the values in array m.',
-                d: 'Returns the sum of the largest value in each of the rows in array m.',
-                e: 'Returns the smallest value in array m.'
-            },
-            level: 'Invitational',
-            correctAnswer: 'd'
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right?",
+        code: `
+int[][][] a=
+{{{3,2,1},{1,2,3},{6,5,4}},
+{{4,5,6},{9,5,1},{7,5,3}},
+{{8,5,2},{1,2,4},{8,4,3}}};
+int sum=0;
+for(int x=0;x<3;x+=2)
+    for(int y=0;y<3;y+=2)
+        for(int z=0;z<3;z+=2)
+            sum+=a[x][y][z];
+out.print(sum);
+
+        `,
+        answers: {
+            a: "47",
+            b: "27",
+            c: `33`,
+            d: `35`,
+            e: "Error. Throws an ArrayIndexOutOfBoundsException.",
         },
-        // 2023 District
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int T = 12;
-if (T > 10)
-    T = T - 3;
-if (T == 12)
-    T *= 2;
-else
-    T /= 2;
-if (T - 10 < 0)
-    T++;
-else
-    T--;
-out.print(T);
-`,
-            answers: {
-                a: '3',
-                b: '4',
-                c: '5',
-                d: '19',
-                e: '25'
-            },
-            level: 'District',
-            correctAnswer: 'c'
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "When n is a power of 2, which of the following is always equivalent to m%n?",
+        answers: {
+            a: "m&n",
+            b: "m& (n-1)",
+            c: `m| (n-1)`,
+            d: `m^n`,
+            e: "m^ (n-1)",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String St = "A BC DEF GH I JK LMN O";
-Scanner B = new Scanner(St);
-for(int x=0; x<=2; x++)
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Number", "Misc"]
+    },
+    {
+        question: "Which of the following would best replace <code 1> in the sort method implemented above to ensure that list is sorted in ascending order?",
+        code: `
+public static void sort(int[] list, int startIndex)
 {
-    B.next();
-    out.print(B.next());
+if ( startIndex >= list.length - 1 )
+    return;
+int minIndex = startIndex;
+for ( <code 1> )
+    if (list[index] < list[minIndex] )
+        minIndex = index;
+int temp = list[startIndex];
+list[startIndex] = list[minIndex];
+list[minIndex] = temp;
+sort(<code 2>);
 }
-`,
-            answers: {
-                a: 'ABCDEFGH',
-                b: 'BCGHJK',
-                c: 'BCGHJKO',
-                d: 'ADEFILMN',
-                e: 'ADEFI'
-            },
-            level: 'District',
-            correctAnswer: 'b'
+        `,
+        answers: {
+            a: " int index = 0; index < list.length-1; index++",
+            b: "int index = startIndex - 1; index < list.length; index++",
+            c: `int index = startIndex + 1; index < list.length; index++`,
+            d: `int index = startIndex + 1; index < minIndex; index++`,
+            e: "int index = startIndex + 1; index < list.length-1; index++",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-boolean[] F = new boolean[20];
-F[1] = true;
-for(int x=2; x<=19; x++)
-    F[x] = F[x-1] ^ F[x-2];
-int C = 0;
-for (int x=0; x<=19; x++)
-    if (F[x])
-        C++;
-out.print(C);
-`,
-            answers: {
-                a: '0',
-                b: '6',
-                c: '10',
-                d: '13',
-                e: '20'
-            },
-            level: 'District',
-            correctAnswer: 'd'
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Tracing", "Recursion"]
+    },
+    {
+        question: "If both values are shown using signed 8-bit 2's complement representation, what is 11101101 minus 11100100? Write your answer using signed 8-bit 2's complement notation.",
+        answers: {
+            a: "10001000",
+            b: "11001001",
+            c: `01001000`,
+            d: `00001001`,
+            e: "00000110",
         },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int L = 512;
-int M = L / 100;
-int N = (L - M * 100) / 10;
-int R = L % 10;
-int U = R*100 + M*10 + N;
-out.print(U);
-`,
-            answers: {
-                a: '0',
-                b: '9',
-                c: '16',
-                d: '22',
-                e: '25'
-            },
-            level: 'District',
-            correctAnswer: 'd'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int L = 512;
-int M = L / 100;
-int N = (L - M * 100) / 10;
-int R = L % 10;
-int U = R*100 + M*10 + N;
-out.print(U);
-`,
-            answers: {
-                a: '0',
-                b: '9',
-                c: '16',
-                d: '22',
-                e: '25'
-            },
-            level: 'District',
-            correctAnswer: 'd'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int A = 10;
-int B = 12;
-int C = 27;
-out.print(A+B+"A"+C+A+"B"+('A'+B));
-`,
-            answers: {
-                a: '22A37BA12',
-                b: '22A2710B77',
-                c: '22A2710BA12',
-                d: '22A2710BA12',
-                e: '22A37BAB'
-            },
-            level: 'District',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int D = 10;
-int R = 2;
-int P = 4;
-if (D + R > P)
-    P = D;
-else
-    D = P;
-if (D + P > R)
-    R = D;
-else
-    D = R;
-if (P + R > D)
-    D++;
-else
-    D--;
-out.print(D + " " + P + " " + R);
-`,
-            answers: {
-                a: '10 2 4',
-                b: '11 10 11',
-                c: '10 10 10',
-                d: '11 10 10',
-                e: '10 10 11'
-            },
-            level: 'District',
-            correctAnswer: 'd'
-        },
-        // 2023 Regional
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int[] perfect = new int[25];
-for(int x=0; x<24; x++)
-    perfect[x] = x * x - 1;
-out.print(perfect[10] - perfect[8]);
-`,
-            answers: {
-                a: '32',
-                b: '34',
-                c: '35',
-                d: '36',
-                e: '38'
-            },
-            level: 'Regional',
-            correctAnswer: 'd'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int z = 0;
-for(int x=1, y=-5; x<=12; x++, y++)
-    z = x * y;
-out.print(z);
-`,
-            answers: {
-                a: '60',
-                b: '72',
-                c: '66',
-                d: '55',
-                e: '-66'
-            },
-            level: 'Regional',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int z = 0;
-for(int x=1, y=-5; x<=12; x++, y++)
-    z = x * y;
-out.print(z);
-`,
-            answers: {
-                a: '60',
-                b: '72',
-                c: '66',
-                d: '55',
-                e: '-66'
-            },
-            level: 'Regional',
-            correctAnswer: 'b'
-        },{
-            question: "What is the output of the code segment to the right?",
-            code: `
-int z = 0;
-for(int x=1, y=-5; x<=12; x++, y++)
-    z = x * y;
-out.print(z);
-`,
-            answers: {
-                a: '60',
-                b: '72',
-                c: '66',
-                d: '55',
-                e: '-66'
-            },
-            level: 'Regional',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String[]L = {"BOB","JEN","SAM","PAM","MEL"};
-String St = "";
-for(int x=1;x<=3;x++)
-{
-    St += L[x-1].substring(0,1);
-    St += L[x].substring(1,2);
-    St += L[x+1].substring(2,3);
-}
-out.print(St);
-`,
-            answers: {
-                a: 'BEMJALSAM',
-                b: 'BESOEMSAL',
-                c: 'BOBJENSAM',
-                d: 'BSJEAANNL',
-                e: 'BEMJAMSAL'
-            },
-            level: 'Regional',
-            correctAnswer: 'e'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int[][]BP = new int[8][8];
-BP[1][1] = 1;
-for (int y = 2; y<=7; y++)
-    for (int x = 1; x<=7; x++)
-        BP[y][x]= BP[y-1][x]+BP[y-1][x-1];
-out.print(BP[6][5]);
-`,
-            answers: {
-                a: '1',
-                b: '4',
-                c: '5',
-                d: '6',
-                e: '10'
-            },
-            level: 'Regional',
-            correctAnswer: 'c'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String One = "ABCDE";
-String Two = "";
-for(int x=0; x<One.length(); x++)
-    Two = One.substring(x,x+1) + Two;
-out.print(Two);
-`,
-            answers: {
-                a: 'ABCDE',
-                b: 'EDCBA',
-                c: 'ABCDEEDCBA',
-                d: 'ABCDEDCBA',
-                e: 'AABBCCDDEE'
-            },
-            level: 'Regional',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String One = "ABCDE";
-String Two = "";
-for(int x=0; x<One.length(); x++)
-    Two = One.substring(x,x+1) + Two;
-out.print(Two);
-`,
-            answers: {
-                a: 'ABCDE',
-                b: 'EDCBA',
-                c: 'ABCDEEDCBA',
-                d: 'ABCDEDCBA',
-                e: 'AABBCCDDEE'
-            },
-            level: 'Regional',
-            correctAnswer: 'b'
-        },
-        //2025 state
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-boolean a = false;
-boolean b = true;
-a |= a ^ b & !b | a;
-b ^= b ^ !a & a | !b;
-out.print(a ^ b | a);
-`,
-            answers: {
-                a: 'true',
-                b: 'false',
-            },
-            level: 'State',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-double c = 4.5;
-c = Math.nextAfter(c, -7);
-String s = "" + c;
-s = s.substring(0, 4);
-out.printf("%.2f %s",c,s);
-`,
-            answers: {
-                a: '4.00 4.00',
-                b: '4.50 4.49',
-                c: '4.50 4.50',
-                d: '-3.50, -3.5',
-                e: 'There is no output due to a runtime error.'
-            },
-            level: 'State',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int i = -7;
-if(i < 0 | i++ > -10)
-    out.print(1);
-if(i > 0 && i-- < 10)
-    out.print(2);
-else out.print(3);
-out.print(i);
-`,
-            answers: {
-                a: '12-7',
-                b: '13-7',
-                c: '2-7',
-                d: '13-6',
-                e: '3-6'
-            },
-            level: 'State',
-            correctAnswer: 'd'
-        },
-        {
-            question: "What is output by the line marked //q09 in the code to the right?",
-            code: `
-int[][] mat = new int[3][5];
-for(int r = 0; r < 3; r++)
-    for(int c = 4; c >= 0; c--)
-    mat[r][c] =
-        (r + 1) * 5 + (c - 1) * c - 2;
-out.println
-    (Arrays.toString(mat[2])); //q09
-for(int i = 0; i < 4; i ++) {
-    if(i != 3) {
-        mat[i][i] = mat[i][i + 1];
-        mat[i][i]--;
-    } if(i != 0) {
-        mat[i - 1][i + 1] =
-            mat[i - 1][i - 1];
-        mat[i - 1][i]++;
-    }
-    mat[0][i] += i;
-    mat[1][i] -= i;
-}
-out.println
-    (Arrays.toString(mat[1])); //q10
-`,
-            answers: {
-                a: '[13, 13, 15, 19, 25]',
-                b: '[8, 8, 10, 14, 20]',
-                c: '[17, 15, 15, 17, 21]',
-                d: '[12, 10, 10, 12, 16]',
-                e: 'There is no output due to a runtime error.'
-            },
-            level: 'State',
-            correctAnswer: 'a'
-        },
-        {
-            question: "What is output by the line marked //q10 in the code to the right?",
-            code: `
-int[][] mat = new int[3][5];
-for(int r = 0; r < 3; r++)
-    for(int c = 4; c >= 0; c--)
-    mat[r][c] =
-        (r + 1) * 5 + (c - 1) * c - 2;
-out.println
-    (Arrays.toString(mat[2])); //q09
-for(int i = 0; i < 4; i ++) {
-    if(i != 3) {
-        mat[i][i] = mat[i][i + 1];
-        mat[i][i]--;
-    } if(i != 0) {
-        mat[i - 1][i + 1] =
-            mat[i - 1][i - 1];
-        mat[i - 1][i]++;
-    }
-    mat[0][i] += i;
-    mat[1][i] -= i;
-}
-out.println
-    (Arrays.toString(mat[1])); //q10
-`,
-            answers: {
-                a: '[8, 6, 9, 3, 20]',
-                b: '[8, 9, 8, 6, 20]',
-                c: '[12, 8, 9, 5, 16]',
-                d: '[8, 8, 9, 5, 20]',
-                e: 'There is no output due to a runtime error.'
-            },
-            level: 'State',
-            correctAnswer: 'd'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int i = 4;
-switch(5) {
-    case 4: i += 10;
-    case 2: i++;
-        break;
-    default: i += 100;
-}
-out.print(i);
-`,
-            answers: {
-                a: '4',
-                b: '104',
-                c: '15',
-                d: '105',
-                e: 'There is no output due to a compile error.'
-            },
-            level: 'State',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-double x = 0, y = 0;
-x /= y--;
-y = Math.sqrt(y);
-out.print((y == x) + " ");
-out.println(y);
-`,
-            answers: {
-                a: 'true i',
-                b: 'false 0',
-                c: 'false NaN',
-                d: 'true NaN',
-                e: 'There is no output due to a compile error.'
-            },
-            level: 'State',
-            correctAnswer: 'c'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-double x = 0, y = 0;
-x /= y--;
-y = Math.sqrt(y);
-out.print((y == x) + " ");
-out.println(y);
-`,
-            answers: {
-                a: 'true i',
-                b: 'false 0',
-                c: 'false NaN',
-                d: 'true NaN',
-                e: 'There is no output due to a compile error.'
-            },
-            level: 'State',
-            correctAnswer: 'c'
-        },
-        // 2021 State
-         {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int m = 35, n = 18; 
-double x = 19, y = 9.25; 
-double r = m + x / n * y; 
-r = (int)(r + 0.5); 
-out.print(r);
-`,
-            answers: {
-                a: '44.5',
-                b: '44',
-                c: '45.5',
-                d: '45.0',
-                e: '44.0'
-            },
-            level: 'State',
-            correctAnswer: 'd'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int x = 2147483647; 
-int y = 0; 
-while(x > 0) { 
- switch(x % 10) { 
-  case 1: 
-  case 2: 
-  case 3: y++;break; 
-  case 4: 
-  case 5: 
-  case 6: y+=3;break; 
-  case 7: y*=2;break; 
-  default: y/=2; 
- } 
- x/=10;  
-} 
-out.print(y);
-`,
-            answers: {
-                a: '19',
-                b: '4',
-                c: '17',
-                d: '18',
-                e: '26'
-            },
-            level: 'State',
-            correctAnswer: 'c'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-String s = "computersciences"; 
-char[] c = s.toCharArray(); 
-int a = c.length / 2; 
-for(int i = 0; i < a; i++) { 
-  char b = c[i]; 
-  c[i] = c[i + a]; 
-  c[i + a] = b; 
-} 
-for(char d:c) 
-  out.print(d); 
-`,
-            answers: {
-                a: 'secneicsretupmoc',
-                b: 'sciencescomputer',
-                c: 'csocmipeuntceers',
-                d: 'retupmocsecneics',
-                e: 'There is no output due to an error.'
-            },
-            level: 'State',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-double x = 5.0, y = 0.0; 
-for(;x < 6.0;) 
-{ 
-  y += 0.5; 
-  x += 0.2; 
-} 
-out.print(y); 
-`,
-            answers: {
-                a: '2.5',
-                b: '2.0',
-                c: '3.0',
-                d: '6.0',
-                e: 'There is no output due to an error.'
-            },
-            level: 'State',
-            correctAnswer: 'a'
-        },
-        {
-            question: "Which of the following best describes what the method shown below will return?",
-            code: `
-public static double method(double x) { 
-  double m = x / 2; 
-  double n = 0.0; 
-  while(true) { 
-    n = (m + x / m) / 2.0; 
-    if((int)(m * 1000 + 0.5) / 1000.0 == (int)(n * 1000 + 0.5) / 1000.0) 
-      break; 
-    m = n; 
-  } 
-  return (int)(n * 100 + 0.5) / 100.0; 
-} 
-`,
-            answers: {
-                a: 'log_10(x) rounded to four decimal places.',
-                b: 'sqrt(x) rounded to two decimal places.',
-                c: 'log_2(x) rounded to two decimal places.',
-                d: 'x^2 rounded to four decimal places.',
-                e: 'The average of the values between 0.0 and x rounded to two decimal places.' 
-            },
-            level: 'State',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-int count = 0; 
-int x = 1; 
-do { 
-  int y = 1; 
-  while(y <= 7) { 
-    for(int z = 1; z <= 4; z++) 
-      count++; 
-    y++; 
-  } 
-  x++; 
-}while(x <= 10); 
-out.print(count);
-`,
-            answers: {
-                a: '70',
-                b: '280',
-                c: '440',
-                d: '350',
-                e: '4'
-            },
-            level: 'State',
-            correctAnswer: 'b'
-        },
-        {
-            question: "What is the output of the code segment to the right?",
-            code: `
-public static void main(String[] args) { 
-  out.print(method1("193")); 
-} 
-  
-public static int method1(String s) { 
-  int x = 0; 
-  for(int i = 0; i < s.length(); i++) { 
-    char c = s.charAt(i); 
-    x = x * 16 + method2(c); 
-    } 
-  return x; 
-  } 
-  
-public static int method2(char c) { 
-  if(c >= 65 && c <= 70) 
-    return 10 + c - 65; 
-  else 
-    return c - 48; 
-} 
-`,
-            answers: {
-                a: '400',
-                b: '355',
-                c: '403',
-                d: 'None of these are correct.',
-                e: 'There is no output due to an error.'
-            },
-            level: 'State',
-            correctAnswer: 'b'
-        },
-    ]
-}
-
-// The question set for the recursion problems
-
-if (quizType === "Recursion") {
-    window.questions = [
-        {
-            question: 'Recursion question goes here:',
-            answers: {
-                a: 'yes!!!',
-                b: 'no.',
-                c: 'maybe?'
-            },
-            correctAnswer: 'c'
-        }
-    ]
-}
-
-// The question set for the bases / numbers problems. 
-
-if (quizType === "Bases And Numbers") {
-    window.questions = [
-        // 2018 District
-        {
-            question: 'Which of the following is the sum of 11111111_2 and 11110011_2?',
-            answers: {
-                a: "1F3_16",
-                b: "497_10",
-                c: "762_8", 
-                d: "111010010_2",
-                e: "None of the above."
-            },
-            correctAnswer: 'c',
-            level: 'District' 
-        },
-        {
-            question: 'Which of the following Java expressions will correctly round n to r decimal places if n is a double and r is an int?',
-            answers: {
-                a: "(int)(r*Math.pow(10, n)+0.5)/Math.pow(10, n)",
-                b: "(n*Math.pow(10, r)+0.5)/Math.pow(10, r)",
-                c: "(int)(n*Math.pow(10, r)+0.5)/Math.pow(10, r)", 
-                d: "(int)(n*10+0.5)/10",
-                e: "(int)(n/Math.pow(10, r)+0.5)*Math.pow(10, r)"
-            },
-            correctAnswer: 'c',
-            level: 'District' 
-        },
-        {
-            question: 'Evaluate the prefix expression shown:',
-            code: "* - + 8 5 3 2",
-            answers: {
-                a: "20", 
-                b: "12", 
-                c: "88", 
-                d: "45",
-                e: "Correct answer not shown."
-            },
-            correctAnswer: 'a',
-            level: 'District' 
-        },
-        {
-            question: `What is the decimal equivalent of this signed binary 8-bit two's complement value?`,
-            code: "10101010",
-            answers: {
-                a: "-85",
-                b: "86", 
-                c: "-86",
-                d: "87",
-                e: "Correct answer not shown."
-            },
-            correctAnswer: 'c',
-            level: 'District' 
-        },
-        // 2023 State
-        {
-            question: `What is the output of the code segment to the right?`,
-            code: `
-int A = 10;
-int B = 25;
-int Z = A + B % A * A - B / A;
-out.print(Z);
-            `,
-            answers: {
-                a: "50",
-                b: "52", 
-                c: "54",
-                d: "56",
-                e: "58"
-            },
-            correctAnswer: 'e',
-            level: 'State' 
-        },
-        {
-            question: `What is the output of the code segment to the right?`,
-            code: `
-int R = 20;
-int Y = R >> 2 ^ 2 + R & 11;
-out.print(Y);
-            `,
-            answers: {
-                a: "7",
-                b: "12", 
-                c: "15",
-                d: "21",
-                e: "23"
-            },
-            correctAnswer: 'a',
-            level: 'State' 
-        },
-        {
-            question: `Evaluate the prefix expression to the right.`,
-            code: `
-+ / * 3 4 - 17 * 5 3 / + 6 6 3
-            `,
-            answers: {
-                a: "15",
-                b: "24", 
-                c: "12",
-                d: "10",
-                e: "23"
-            },
-            correctAnswer: 'd',
-            level: 'State' 
-        },
-    ]
-}
-
-// The question set for the bases / numbers problems. 
-if (quizType === "Data Structures") {
-    window.questions = [
-        // 2025 state
-        {
-            question: `Which of the following could replace <1*> for the code to the right to compile without error?`,
-            code: `
-public void scan()throws <1*>{
-    File f = new File("a.dat");
-    Scanner sc = new Scanner(f);
-    sc.nextLine();
-    out.print(sc.nextLine());
-}
-            `,
-            answers: {
-                a: "IOException",
-                b: "FileNotFoundException", 
-                c: "Exception",
-                d: "Only A or C",
-                e: "Any of the above will work."
-            },
-            correctAnswer: 'e',
-            level: 'State' 
-        },
-        {
-            question: `What is output by the code to the right?`,
-            code: `
-ArrayList<String> a;
-a = new ArrayList<String>();
-a.add("Bumblebee");
-a.add("Optimus");
-a.add(1,"RC");
-a.set(0, "Ironhide");
-if(!a.contains(new String("RC")))
-    a.add(1, "RC");
-out.println(a);
-            `,
-            answers: {
-                a: "[Ironhide, RC, Bumblebee, RC, Optimus]",
-                b: "[Ironhide, RC, RC, Optimus]", 
-                c: "[Ironhide, RC, Optimus]",
-                d: "[Ironhide, Bumblebee, RC, Optimus]",
-                e: "There is no output due to a runtime error."
-            },
-            correctAnswer: 'c',
-            level: 'State' 
-        },
-        {
-            question: `What is the asymptotic time complexity of the code to the right?`,
-            code: `
-PriorityQueue<Integer> pq;
-pq = new PriorityQueue<Integer>
-    (Collections.reverseOrder());
-for(int y = 0; y < N; y++) {
-    double d = Math.random() * 100;
-    pq.add((int)(d));
-}
-out.println(pq);
-            `,
-            answers: {
-                a: "O(nlogn)",
-                b: "O(logn)",
-                c: "O(n)",
-                d: "O(n^2)",
-                e: "O(n^2logn)"
-            },
-            correctAnswer: 'a',
-            level: 'State' 
-        },
-         {
-            question: `Which data structure is demonstrated by the code to the right?`,
-            code: `
-PriorityQueue<Integer> pq;
-pq = new PriorityQueue<Integer>
-    (Collections.reverseOrder());
-for(int y = 0; y < N; y++) {
-    double d = Math.random() * 100;
-    pq.add((int)(d));
-}
-out.println(pq);
-            `,
-            answers: {
-                a: "Queue",
-                b: "Min-Heap",
-                c: "Linked List",
-                d: "Max-Heap",
-                e: "Stack"
-            },
-            correctAnswer: 'd',
-            level: 'State' 
-        },
-        {
-            question: `Which of the following pairings does not properly match the data structure in question to the worst-case asymptotic time complexity of the operation on that structure?`,
-            answers: {
-                a: "O(1) random access using an Array.",
-                b: "O(1) find min using a Min-Heap",
-                c: "O(logn) search using a Tree Set",
-                d: "O(1) search using a Hash Set.",
-                e: "O(logn) search using a Binary Search Tree"
-            },
-            correctAnswer: 'e',
-            level: 'State' 
-        },
-    ]
-}
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Number","Misc"]
+    },
+];

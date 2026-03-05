@@ -115,14 +115,23 @@ window.onload = function () {
     const quizType = urlParams.get('type');
     document.getElementById('type').textContent = quizType
 
-    let questions = window.questions; 
+    let questions = []; 
+    console.log(questions)
+    for(q in window.questions){
+        let tags = window.questions[q].tags; 
 
-    if (!questions) {
+        if(tags.includes(quizType) || quizType === "All"){
+            questions.push(window.questions[q]); 
+        }
+    }
+    if (questions.length === 0) {
         this.alert("404 - Topic Type Not Found! :(");
         window.location.href = "index.html";
     } else {
         questions = shuffleQuestions(questions);
     }
+
+    this.document.title = "UIL - Training " + quizType; 
 
     const quizContainer = this.document.getElementById("quizContainer");
     const submitButton = this.document.getElementById("submitButton");
