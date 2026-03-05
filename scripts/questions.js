@@ -19,6 +19,8 @@
  * 3. Numbers - Problems involving mathematical reasoning or general number concepts.
  * 4. Boolean - Problems involving boolean logic and algebra.
  * 5. Misc. - Problems that are ultra-specific and do not fall into any other category. 
+ * 6. String - Problems that involve string modification, including printf
+ * 7. Data Structures - Problems that use non primitive data structures (Maps, Trees, Queues, ArrayLists, etc.)
  * ___
  * If you need a new tag, please update the jsDoc to reflect it. 
  */
@@ -72,7 +74,7 @@ window.questions = [
         },
         correctAnswer: 'a',
         level: 'State',
-        tags: ["Misc", "Printf"]
+        tags: ["Misc", "String"]
     },
     {
         question: "What is the output of the code segment shown on the right? Astericks indicate blank spaces.",
@@ -416,7 +418,7 @@ out.print(s.matches("uil\\.?\\S*@+uiltexas.org"));
         level: 'State',
         tags: ["String", "Misc"]
     },
-     {
+    {
         question: "What is the output of line #1 in the code segment shown on the right?",
         code: `
 TreeMap<Integer,Integer> tm=new 
@@ -614,6 +616,522 @@ sort(<code 2>);
         },
         correctAnswer: 'd',
         level: 'State',
-        tags: ["Number","Misc"]
+        tags: ["Number", "Misc"]
+    },
+    // 2019 State
+    {
+        question: "Which of the following values is NOT equal to 133_7",
+        answers: {
+            a: "73_10",
+            b: "49_16",
+            c: "112_8",
+            d: "01001001_2",
+            e: "243_5"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Number"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+out.print(-(5*-7/2+9-4));
+        `,
+        answers: {
+            a: "12",
+            b: "-12",
+            c: "-22",
+            d: "22",
+            e: "7"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Number"]
+    },
+    {
+        question: "What is the output of the code segment to the right? #'s indicate blank spaces.",
+        code:
+            `
+int x=12;
+double y=3.25;
+out.printf("%-+,10.3f",x*y);
+        `,
+        answers: {
+            a: "####39.000",
+            b: "########39",
+            c: "###+39.000",
+            d: "39.0000000",
+            e: "+39.000###"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["String"]
+    },
+    {
+        question: "What is the output of the code segment to the right? #'s indicate blank spaces.",
+        code:
+            `
+String s1="marchmadness";
+out.print(s1.indexOf('a', 2));
+        `,
+        answers: {
+            a: "1",
+            b: "2",
+            c: "5",
+            d: "6",
+            e: "7"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["String"]
+    },
+    {
+        question: "What is the output of the code segment to the right? #'s indicate blank spaces.",
+        code:
+            `
+out.println(true&&!false^true||false);
+        `,
+        answers: {
+            a: "true",
+            b: "false"
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Boolean"]
+    },
+    {
+        question: "What is the output of the code segment to the right? #'s indicate blank spaces.",
+        code:
+            `
+int x=14;
+byte y=14;
+short z=12;
+out.print(x+y-z*y/3);
+        `,
+        answers: {
+            a: "23",
+            b: "74",
+            c: "-20",
+            d: "-28",
+            e: "51"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Boolean"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+out.print(Math.floor(Math.PI)*Math.ceil(Math.E));
+        `,
+        answers: {
+            a: "9.0",
+            b: "6.0",
+            c: "12.0",
+            d: "12",
+            e: "9"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Number"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+int a=5,b=-2,c=0,d=-10;
+if(a-d>=b)
+    if(b*a>c)
+        out.print("1");
+    else
+        {
+        out.print("2");
+        if(b==d+8)
+            out.print("3");
+        }
+else
+    if(c+d>c)
+        out.print("4");
+else
+    out.print("5");
+out.print("6");
+        `,
+        answers: {
+            a: "146",
+            b: "23",
+            c: "236",
+            d: "56",
+            e: "36"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+for(int x=5;x>0;x--)
+    {
+    for(int y=x;y>=1;y--)
+        out.print("^");
+    out.println();
+    }
+        `,
+        answers: {
+            a: `^^^^
+^^^
+^^
+^`,
+            b: `^^^^^
+^^^^
+^^^
+^^
+^`,
+            c: `^
+^^
+^^^
+^^^^`,
+            d: `^
+^^
+^^^
+^^^^
+^^^^^`,
+            e: `^^^^^
+^^^^
+^^^
+^^`
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+int i[]= {2,4,8,6,9,7,1,3,5};
+i[i.length-i[1]]=i[3]+i[i.length-1];
+int j[]= {8,9,7,4,3,5,1,2,6};
+j[i[6]]=j[i[j[4]]]+i[j[5]];
+out.print(Arrays.toString(j));
+        `,
+        answers: {
+            a: "[6, 5, 1, 4, 11, 9, 8, 2, 3]",
+            b: "[8, 12, 7, 4, 3, 5, 1, 2, 6]",
+            c: "[8, 7, 4, 3, 15, 5, 1, 2, 6]",
+            d: "[1, 6, 3, 4, 13, 5, 1, 8, 9]",
+            e: "There is not output. Throws an ArrayIndexOutOfBoundsExcetption."
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "Consider the class shown on the right and make no assumptions regarding import statements. Which of the following must replace <code> to allow the class to compile and execute correctly and allow the user to enter two values from the keyboard?",
+        code:
+            `
+import java.util.Scanner;
+public class Q11 {
+
+public static void main(String[] args) {
+    Scanner keyboard=new Scanner(<code>);
+    System.out.print("Enter first number: ");
+    int num1=keyboard.nextInt();
+    System.out.print("Enter second number: ");
+    int num2=keyboard.nextInt();
+    System.out.print("Sum = "+(num1+num2));
+    }
+}
+        `,
+        answers: {
+            a: "System.out",
+            b: "in",
+            c: "Scanner.in",
+            d: "Scanner.nextInt()",
+            e: "System.in"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+double v=0.0;
+do {
+    v=v+3.75;
+    v=v-0.5;
+}while(v<25.5);
+out.print(v);
+        `,
+        answers: {
+            a: "25.5",
+            b: "25.0",
+            c: "22.75",
+            d: "26.0",
+            e: "25.75"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Tracing", "Number"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+int i=158;
+i%=5^4<<3%2;
+out.print(i);
+        `,
+        answers: {
+            a: "0",
+            b: "1",
+            c: "2",
+            d: "13",
+            e: "14"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Number"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+out.println(Byte.BYTES+Byte.SIZE);
+        `,
+        answers: {
+            a: "9",
+            b: "18",
+            c: "17",
+            d: "10",
+            e: "36"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+ArrayList<String> az=new
+ArrayList<String>();
+az.add("m");az.add("r");az.add("p");
+ArrayList<String> by=new
+ArrayList<String>();
+by.add("f");by.add("n");by.add("d");
+by.addAll(2, az);
+out.print(by);
+        `,
+        answers: {
+            a: "[f, n, d, m, r, p]",
+            b: "[m, r, f, n, d, p]",
+            c: "[m, r, f, n, d]",
+            d: "[f, m, r, p, n, d]",
+            e: "[f, n, m, r, p, d]"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+String s="computer";
+String t=s.length()<s.charAt(1)?s.substring(1, 4):s.substring(3, 7);
+out.print(t);
+        `,
+        answers: {
+            a: "o",
+            b: "7",
+            c: "8",
+            d: "omp",
+            e: "pute"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["String", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+List<String> list=new LinkedList<String>();
+list.add("A");list.add("R");
+list.add("O");list.add("B");
+list.add("W");list.add("N");
+ListIterator<String> li=list.listIterator(list.indexOf("B"));
+out.print(li.next());
+li.next();
+while(li.hasPrevious()) {
+    out.print(li.previous());
+    }
+        `,
+        answers: {
+            a: "OBORA",
+            b: "WBORA",
+            c: "BBORA",
+            d: "BWBORA",
+            e: "WWBORA"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "Which line in the code segment shown here will print true?",
+        code:
+            `
+final int flags=Pattern.CASE_INSENSITIVE|Pattern.LITERAL;
+Pattern p=Pattern.compile("[abc]+", flags);
+out.println(p.matcher("[aBc]+").matches());//line #1
+out.println(p.matcher("abc").matches());//line #2
+out.println(p.matcher("aBcAbC").matches());//line #3
+        `,
+        answers: {
+            a: "line #1",
+            b: "line #2",
+            c: "line #3",
+            d: "All of the above.",
+            e: "None of the above."
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["String", "Misc"]
+    },
+    {
+        question: "Given the code segment shown on the right, which of the following lines will NOT compile?",
+        code:
+            `
+ArrayList<Integer> arraylist=new
+ArrayList<Integer>();
+Stack<Integer> stack=new Stack<Integer>();
+Queue<Integer> priorityqueue=new
+PriorityQueue<Integer>();
+int[] array=new int[10];
+        `,
+        answers: {
+            a: "Collections.sort(arraylist);",
+            b: "Collections.sort(stack);",
+            c: "Collections.sort(priorityqueue);",
+            d: "Collections.sort(array);",
+            e: "More than one of the above."
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Data Structures", "Misc"]
+    },
+    {
+        question: "SpecialIterator is ________________________.",
+        answers: {
+            a: "an inner class",
+            b: "an anonymous class",
+            c: "a local class",
+            d: "an interface",
+            e: "a nested static class"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code:
+            `
+out.print("U"+5*2+"V"+4+9);
+        `,
+        answers: {
+            a: "U52V49",
+            b: "U10V13",
+            c: "U10V49",
+            d: "UV1013",
+            e: "There is no output due to an error."
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Misc", "Tracing"]
+    },
+    {
+        question: "Which of the following will always print a random lowercase letter?",
+        answers: {
+            a: "out.print((char)(r.nextInt(26)+97));",
+            b: "out.print((char)(r.nextInt(97)+26));",
+            c: "out.print((char)(r.nextInt(26)));",
+            d: "out.print((char)(r.nextInt(26)+65));",
+            e: "out.print((char)(r.nextInt(27)+97));"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Misc", "String", "Number"]
+    },
+    {
+        question: "If x is a power of 2 then the method shown on the right returns the equivalent of _____.",
+        code: `
+public static int mtd(int x) {
+    if(x>1)return mtd(x/2)+1;
+    return 0;
+}
+        `,
+        answers: {
+            a: "2^x",
+            b: "log_2(x)",
+            c: "log_10(x)",
+            d: "x^2",
+            e: "0"
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Number", "Recursion"]
+    },
+    {
+        question: "Which of the following lies closest to zero on a number line? All of the values are shown using signed 8-bit binary two's complement notation.",
+        answers: {
+            a: "10100011",
+            b: "10001010",
+            c: "11011101",
+            d: "11001101",
+            e: "11010110"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Number"]
+    },
+    {
+        question: "Which of the following is equivalent to the Boolean expression shown on the right?",
+        code: `
+!(A ∗ (A + B) + (B + B ∗ A)
+        `,
+        answers: {
+            a: "A̅+B̅",
+            b: "!(A*B)",
+            c: "A+B",
+            d: "!(A^B)",
+            e: "!A * !B"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Boolean"]
+    },
+    {
+        question: "What does the reverse polish notation w/ INTEGER division equation shown evaluate to?",
+        code: `
+15 8 - 26 5 + + 43 7 / *
+        `,
+        answers: {
+            a: "200",
+            b: "212",
+            c: "228",
+            d: "231",
+            e: "190"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Number"]
     },
 ];
