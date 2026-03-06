@@ -1,3 +1,152 @@
+
+
+:root {
+    --bg-primary: #0f1412;
+    --bg-secondary: #151b17;
+    --bg-panel: #1a221d;
+
+    --text-primary: #d7e2da;
+    --text-muted: #9fb3a7;
+
+    --accent: #4f8f6b;
+    --accent-hover: #66a883;
+
+    --border-subtle: #243129;
+
+    --font-main: "Inter", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", "Consolas", monospace;
+}
+
+body {
+    margin: 0;
+    padding: 40px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+}
+
+
+h1 {
+    font-family: var(--font-mono);
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+}
+
+#type {
+    color: var(--accent);
+}
+
+/*QBox*/
+
+#quizContainer {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 20px;
+}
+
+
+
+#resultsContainer {
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    color: var(--accent);
+}
+
+/* Nav B*/
+
+button {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+    padding: 10px 18px;
+    margin: 6px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+button:hover {
+    border-color: var(--accent);
+    color: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+
+#changeContainer {
+    margin-top: 32px;
+    padding: 20px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+}
+
+/*feet*/
+
+#footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+
+/*qblock */
+.question {
+    margin-bottom: 22px;
+    line-height: 1.6;
+    font-size: larger;
+}
 .code {
     white-space: pre-wrap;
+    font-family: ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace;
+    background-color: #0f1412;
+    outline: 2px solid #4f8f6b;
+    padding: 8px;
+    font-size: 18px;
+}
+
+/*answers */
+.answers {
+    margin-top: 12px;
+}
+
+.answers label {
+    display: block;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: var(--font-main);
+}
+
+/* subtlety is key (green violence) */
+.answers label:hover {
+    border-color: var(--accent);
+    background: #18221c;
+}
+
+.answers input[type="radio"] {
+    margin-right: 10px;
+    accent-color: var(--accent);
 }

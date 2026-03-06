@@ -17,12 +17,13 @@
  */
 function generateQuiz(questions, quizContainer, resultsContainer, submitButton, nextButton, previousButton) {
     let i = 0;
-
+    const correct = new Audio("assets/correct.mp3")
     function showResults(userAnswer) {
 
         if (questions[i].correctAnswer === userAnswer) {
             resultsContainer.innerHTML =
                 '<div class="correct">Correct!</div>';
+            correct.play() 
         } else {
             resultsContainer.innerHTML =
                 '<div class="wrong">Wrong!, correct answer is: '
@@ -44,14 +45,24 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton, 
             )
         }
 
-        const code = questions[i].code ? `<div class="code">${questions[i].code}</div>` : "";
+        const code = questions[i].code ? `<div class="code">
+        ${questions[i].code
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+        }</div>` : "";
         const level = questions[i].level ? `<div class="level">${questions[i].level}</div>` : "";
+
+        const question = questions[i].question
+                            .replaceAll("&", "&amp;")
+                            .replaceAll("<", "&lt;")
+                            .replaceAll(">", "&gt;")
 
         resultsContainer.innerHTML = "";
 
         quizContainer.innerHTML =
             '<div>'
-            + '<div class="question">' + questions[i].question + '</div>'
+            + '<div class="question">' + question + '</div>'
             + code
             + '<div class="answers">' + answers.join("") + '</div>'
             + '<div class="qnum">' + (i + 1) + "/" + questions.length + '</div>'
@@ -110,14 +121,23 @@ window.onload = function () {
     const quizType = urlParams.get('type');
     document.getElementById('type').textContent = quizType
 
-    let questions = window.questions; 
+    let questions = []; 
+    console.log(questions)
+    for(q in window.questions){
+        let tags = window.questions[q].tags; 
 
-    if (!questions) {
+        if(tags.includes(quizType) || quizType === "All"){
+            questions.push(window.questions[q]); 
+        }
+    }
+    if (questions.length === 0) {
         this.alert("404 - Topic Type Not Found! :(");
         window.location.href = "index.html";
     } else {
         questions = shuffleQuestions(questions);
     }
+
+    this.document.title = "UIL - Training " + quizType; 
 
     const quizContainer = this.document.getElementById("quizContainer");
     const submitButton = this.document.getElementById("submitButton");
