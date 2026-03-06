@@ -122,7 +122,7 @@ out.print(Math.round(Math.E));
         },
         correctAnswer: 'd',
         level: 'State',
-        tags: ["Number"]
+        tags: ["Numbers"]
     },
     {
         question: "Given the code segment shown on the right, which of the following additional lines of code will compile and execute correctly?",
@@ -141,7 +141,7 @@ float z=4.15f;
         },
         correctAnswer: 'a',
         level: 'State',
-        tags: ["Number", "Types"]
+        tags: ["Numbers", "Types"]
     },
     {
         question: "What is the output of the code segment to the right?",
@@ -283,7 +283,7 @@ out.print(x);
         },
         correctAnswer: 'a',
         level: 'State',
-        tags: ["Tracing", "Number", "Misc"]
+        tags: ["Tracing", "Numbers", "Misc"]
     },
     {
         question: "What is the output of the code segment to the right?",
@@ -377,7 +377,7 @@ for(int x=1;x<=1000;x++)
         },
         correctAnswer: 'a',
         level: 'State',
-        tags: ["Data Structures", "Number"]
+        tags: ["Data Structures", "Numbers"]
     },
     {
         question: "Which of the following can correctly replace <code> in the code segment shown on the right?",
@@ -397,7 +397,7 @@ out.print(sum);
         },
         correctAnswer: 'e',
         level: 'State',
-        tags: ["Number", "Misc"]
+        tags: ["Numbers", "Misc"]
     },
     {
         question: "What is the output of the code segment shown?",
@@ -575,7 +575,7 @@ out.print(sum);
         },
         correctAnswer: 'b',
         level: 'State',
-        tags: ["Number", "Misc"]
+        tags: ["Numbers", "Misc"]
     },
     {
         question: "Which of the following would best replace <code 1> in the sort method implemented above to ensure that list is sorted in ascending order?",
@@ -616,7 +616,7 @@ sort(<code 2>);
         },
         correctAnswer: 'd',
         level: 'State',
-        tags: ["Number", "Misc"]
+        tags: ["Numbers", "Misc"]
     },
     // 2019 State
     {
@@ -630,7 +630,7 @@ sort(<code 2>);
         },
         correctAnswer: 'c',
         level: 'State',
-        tags: ["Number"]
+        tags: ["Numbers"]
     },
     {
         question: "What is the output of the code segment to the right?",
@@ -647,7 +647,7 @@ out.print(-(5*-7/2+9-4));
         },
         correctAnswer: 'a',
         level: 'State',
-        tags: ["Number"]
+        tags: ["Numbers"]
     },
     {
         question: "What is the output of the code segment to the right? #'s indicate blank spaces.",
@@ -735,7 +735,7 @@ out.print(Math.floor(Math.PI)*Math.ceil(Math.E));
         },
         correctAnswer: 'a',
         level: 'State',
-        tags: ["Number"]
+        tags: ["Numbers"]
     },
     {
         question: "What is the output of the code segment to the right?",
@@ -877,7 +877,7 @@ out.print(v);
         },
         correctAnswer: 'd',
         level: 'State',
-        tags: ["Tracing", "Number"]
+        tags: ["Tracing", "Numbers"]
     },
     {
         question: "What is the output of the code segment to the right?",
@@ -896,7 +896,7 @@ out.print(i);
         },
         correctAnswer: 'c',
         level: 'State',
-        tags: ["Number"]
+        tags: ["Numbers"]
     },
     {
         question: "What is the output of the code segment to the right?",
@@ -1068,7 +1068,7 @@ out.print("U"+5*2+"V"+4+9);
         },
         correctAnswer: 'a',
         level: 'State',
-        tags: ["Misc", "String", "Number"]
+        tags: ["Misc", "String", "Numbers"]
     },
     {
         question: "If x is a power of 2 then the method shown on the right returns the equivalent of _____.",
@@ -1087,7 +1087,7 @@ public static int mtd(int x) {
         },
         correctAnswer: 'b',
         level: 'State',
-        tags: ["Number", "Recursion"]
+        tags: ["Numbers", "Recursion"]
     },
     {
         question: "Which of the following lies closest to zero on a number line? All of the values are shown using signed 8-bit binary two's complement notation.",
@@ -1100,7 +1100,7 @@ public static int mtd(int x) {
         },
         correctAnswer: 'c',
         level: 'State',
-        tags: ["Number"]
+        tags: ["Numbers"]
     },
     {
         question: "Which of the following is equivalent to the Boolean expression shown on the right?",
@@ -1118,20 +1118,663 @@ public static int mtd(int x) {
         level: 'State',
         tags: ["Boolean"]
     },
+    // State 2021
     {
-        question: "What does the reverse polish notation w/ INTEGER division equation shown evaluate to?",
+        question: "What is the product of 10112 and 11002?",
+        answers: {
+            a: "17_16",
+            b: "AC_16",
+            c: "132_16",
+            d: "84_16",
+            e: "A4_16"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Numbers"]
+    },
+    {
+        question: "What is the output of the statement shown on the right?",
         code: `
-15 8 - 26 5 + + 43 7 / *
+out.print(8 + 5 - -4 / 2 * 3);
         `,
         answers: {
-            a: "200",
-            b: "212",
-            c: "228",
-            d: "231",
-            e: "190"
+            a: "19",
+            b: "20",
+            c: "24",
+            d: "13",
+            e: "-20"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Numbers"]
+    },
+    {
+        question: "What is the output of the line of code shown on the right? Asterisks indicate spaces.",
+        code: `
+out.printf("%10.0s%10s","hello","goodbye");
+        `,
+        answers: {
+            a: "hello*****goodbye***",
+            b: "*****hello***goodbye",
+            c: "*************goodbye",
+            d: "hellogoodbye***",
+            e: "There is no output due to an error."
         },
         correctAnswer: 'c',
         level: 'State',
-        tags: ["Number"]
+        tags: ["String"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+String str = "AustinSanAntonioZoo";
+out.print(str.replace('a', 'Z'));
+        `,
+        answers: {
+            a: "ZustinSZnZntonioZoo",
+            b: "ZustinSanAntonioZoo",
+            c: "ZustinSanZntonioZoo",
+            d: "AustinSanAntonioaoo",
+            e: "AustinSZnAntonioZoo"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["String"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+boolean a = true, b = false;
+boolean c = true, d = false;
+boolean e = !(a && d) || !(c ^ b);
+out.print(e);
+        `,
+        answers: {
+            a: "true",
+            b: "false"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Boolean"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+out.print(Math.floor(-Math.cbrt(-9)));
+        `,
+        answers: {
+            a: "-2.0",
+            b: "2.0",
+            c: "-3.0",
+            d: "3.0",
+            e: "There is no output due to an error."
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Numbers"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+int m = 35, n = 18;
+double x = 19, y = 9.25;
+double r = m + x / n * y;
+r = (int)(r + 0.5);
+out.print(r);
+        `,
+        answers: {
+            a: "44.5",
+            b: "44",
+            c: "45.5",
+            d: "45.0",
+            e: "44.0"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Numbers"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+int x = 2147483647;
+int y = 0;
+while(x > 0) {
+    switch(x % 10) {
+        case 1:
+        case 2:
+        case 3: y++;break;
+        case 4:
+        case 5:
+        case 6: y+=3;break;
+        case 7: y*=2;break;
+        default: y/=2;
+    }
+    x/=10;
+}
+out.print(y);
+        `,
+        answers: {
+            a: "19",
+            b: "4",
+            c: "17",
+            d: "18",
+            e: "26"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Numbers", "Tracing", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+int x = 2147483647;
+int y = 0;
+while(x > 0) {
+    switch(x % 10) {
+        case 1:
+        case 2:
+        case 3: y++;break;
+        case 4:
+        case 5:
+        case 6: y+=3;break;
+        case 7: y*=2;break;
+        default: y/=2;
+    }
+    x/=10;
+}
+out.print(y);
+        `,
+        answers: {
+            a: "19",
+            b: "4",
+            c: "17",
+            d: "18",
+            e: "26"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Numbers", "Tracing", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+String s = "computersciences";
+char[] c = s.toCharArray();
+int a = c.length / 2;
+for(int i = 0; i < a; i++) {
+    char b = c[i];
+    c[i] = c[i + a];
+    c[i + a] = b;
+}
+for(char d:c)
+    out.print(d);
+        `,
+        answers: {
+            a: "secneicsretupmoc",
+            b: "sciencescomputer",
+            c: "csocmipeuntceers",
+            d: "retupmocsecneics",
+            e: "There is no output due to an error."
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Tracing", "Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+double x = 5.0, y = 0.0;
+for(;x < 6.0;)
+{
+    y += 0.5;
+    x += 0.2;
+}
+out.print(y);
+        `,
+        answers: {
+            a: "2.5",
+            b: "2.0",
+            c: "3.0",
+            d: "6.0",
+            e: "There is no output due to an error."
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "Which of the following throws declarations is required for the main method to ensure that the class shown on the right will compile and execute as intended? Assume that all necessary import statements are present.",
+        code: `
+public class Q11
+{
+public static void main(String[] args)
+    {
+    File file = new File("data.dat");
+    try {
+        Scanner scr = new Scanner(file);
+        while(scr.hasNext())
+            out.print(scr.next());
+        scr.close();
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+    }
+}
+        `,
+        answers: {
+            a: "throws FileNotFoundException",
+            b: "throws Throwable",
+            c: "throws IOException",
+            d: "throws Exception",
+            e: "This class does not require a throws declaration."
+        },
+        correctAnswer: 'A',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "What is the output of the code segment to the right? Asterisks indicate spaces.",
+        code: `
+out.print(18 / 3 & 4 + 5 << 1);
+        `,
+        answers: {
+            a: "6",
+            b: "8",
+            c: "3",
+            d: "2",
+            e: "No output. Throws an ArithmeticException."
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Numbers"]
+    },
+    {
+        question: "Which of the following statements is true about the code segment shown on the right?",
+        code: `
+byte a = 15;
+byte b = 10;
+byte c = (byte)(a * b);
+out.print(c);
+        `,
+        answers: {
+            a: "The coded segment will compile and execute and will print zero.",
+            b: "The code segment will compile and execute but will print a non-zero value that is not the product of a and b.",
+            c: "The code segment will compile and execute and will print the product of a and b.",
+            d: "The code segment will compile, execute and print the product of a and b only if the cast to byte is removed.",
+            e: "The code segment will not compile and execute as shown."
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Numbers", "Tracing"]
+    },
+    {
+        question: "What is the output of the code segment to the right?",
+        code: `
+ArrayList<String> list = new
+ArrayList<String>();
+list.add("blue");list.add("green");
+list.add("red");list.add("orange");
+list.add("purple");list.add("yellow");
+int x = 1;
+while(list.contains("orange"))
+{
+    list.remove(x);
+    x++;
+}
+out.print(list);
+        `,
+        answers: {
+            a: "[orange, purple, yellow]",
+            b: "[purple, yellow]",
+            c: "[blue, red, purple, yellow]",
+            d: "[red, purple, yellow]",
+            e: "[blue, purple, yellow]"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "Which of the following must replace <code> in the method sum shown on the right?",
+        code: `
+public static void main(String[] args) {
+    out.println(sum(5,2,4,7,3));
+}
+public static int sum(<code>) {
+    int t = 0;
+    for(int x:nums)
+        t+=x;
+    return t;
+}
+        `,
+        answers: {
+            a: "int...nums",
+            b: "int[] nums",
+            c: "int nums",
+            d: "int:nums",
+            e: "int nums{}"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "Shown on the right is an array in its original state and in its sorted state after a radix sort has been applied to the array. The algorithm uses base 10 and starts with the least significant digit. The state of the array after each pass of the algorithm is not shown. Which of the following represents the state of the array after the pass marked by question marks and the //comment",
+        code: `
+[7, 2111, 158, 3, 215, 1, 20, 45, 1254]
+[ , , , , , , , , ]
+[ ?, ?, ?, ?, ?, ?, ?, ?, ?]//comment
+[ , , , , , , , , ]
+[1, 3, 7, 20, 45, 158, 215, 1254, 2111]
+        `,
+        answers: {
+            a: "7, 158, 3, 215, 1, 20, 45, 1254, 2111",
+            b: "1, 3, 7, 2111, 158, 215, 20, 45, 1254",
+            c: "1, 3, 158, 2111, 215, 7, 20, 45, 1254",
+            d: "1, 1254, 158, 215, 2111, 20, 3, 7, 45,",
+            e: "1, 3, 7, 2111, 215, 20, 45, 1254, 158"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "Which of the following statements is NOT true about a protected data member of a class?",
+        answers: {
+            a: "It may be accessed from within the class.",
+            b: "It may be accessed from within the package that contains the class.",
+            c: "It may be accessed from a subclass of the class in a different package.",
+            d: "It may be accessed from a different class within a different package.",
+            e: "None of the above. All of the statements are true about protected data members."
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Misc"]
+    },
+    {
+        question: "Which of the following Boolean expressions will produce the truth table shown on the right?",
+        code: `
+A B C
+T T T F
+T T F T
+T F T F
+T F F F
+F T T T
+F T F F
+F F T T
+F F F T
+        `,
+        answers: {
+            a: "A && !(B && !C)",
+            b: "A ^ !(B && !C)",
+            c: "A ^ (!B || C)",
+            d: "!(A || B && C)",
+            e: "More than one of the above"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Boolean"]
+    },
+    {
+        question: "Which of the following best describes what the method shown above will return?",
+        code: `
+public static double method(double x) {
+    double m = x / 2;
+    double n = 0.0;
+    while(true) {
+        n = (m + x / m) / 2.0;
+        if((int)(m * 1000 + 0.5) / 1000.0 == (int)(n * 1000 + 0.5) / 1000.0)
+            break;
+        m = n;
+    }
+    return (int)(n * 100 + 0.5) / 100.0;
+}
+        `,
+        answers: {
+            a: "log_10(x) rounded to four decimal places.",
+            b: "√x rounded to two decimal places.",
+            c: "log_2(x) rounded to two decimal places.",
+            d: "x^2 rounded to four decimal places.",
+            e: "The average of the values between 0.0 and x rounded to two decimal places."
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right?",
+        code: `
+int r = 0;
+for(int x = 1; x <= 30; x += 2) {
+    if(x % 3 == 0)
+        continue;
+    r += x;
+}
+out.print(r);
+        `,
+        answers: {
+            a: "225",
+            b: "150",
+            c: "300",
+            d: "1",
+            e: "90"
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right?",
+        code: `
+int count = 0;
+int x = 1;
+do {
+    int y = 1;
+    while(y <= 7) {
+        for(int z = 1; z <= 4; z++)
+        count++;
+        y++;
+    }
+    x++;
+}while(x <= 10);
+out.print(count);
+        `,
+        answers: {
+            a: "70",
+            b: "280",
+            c: "440",
+            d: "350",
+            e: "4"
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "Which of the following must replace <code> in the code segment shown on the right?",
+        code: `
+Map<Character,Integer> m = new TreeMap<>();
+String s = "acclimatization";
+for(int i = 0; i < s.length(); i++)
+m.put(s.charAt(i), i);
+Set<Character> z = <code>;
+for(char i:z)
+out.print(m.get(i) + " ");
+        `,
+        answers: {
+            a: "m.keySet()",
+            b: "m.values()",
+            c: "m.entrySet()",
+            d: "m.size()",
+            e: "m.hashCode()"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "Once <code> has been filled in correctly, what is the output of the code segment shown on the right?",
+        code: `
+Map<Character,Integer> m = new TreeMap<>();
+String s = "acclimatization";
+for(int i = 0; i < s.length(); i++)
+m.put(s.charAt(i), i);
+Set<Character> z = <code>;
+for(char i:z)
+out.print(m.get(i) + " ");
+        `,
+        answers: {
+            a: "a c l i m t z o n",
+            b: "a c i l m n o t z",
+            c: "10 2 12 3 5 14 13 11 9",
+            d: "a a a c c i i i l m n o t t z",
+            e: "0 1 4 3 5 14 13 7 9"
+        },
+        correctAnswer: 'c',
+        level: 'State',
+        tags: ["Data Structures"]
+    },
+    {
+        question: "What is the output of the main method shown?",
+        code: `
+public static void main(String[] args) {
+    int[] i = {0,1,2,3,4};
+    out.println(Arrays.toString(method(i)));
+    out.println(Arrays.toString(i));
+}
+
+public static int[] method(int[] j) {
+    int[] k = {1,3,5,7,9};
+    Arrays.fill(j, 1, 2, 5);
+    int[] m = j;
+    j = k;
+    k = m;
+    return k;
+}
+        `,
+        answers: {
+            a: "[1, 3, 5, 7, 9]\n[5, 5, 2, 3, 4]",
+            b: "[1, 3, 5, 7, 9]\n[0, 1, 2, 3, 4]",
+            c: "[0, 5, 2, 3, 4]\n[0, 1, 2, 3, 4]",
+            d: "[0, 5, 2, 3, 4]\n[0, 5, 2, 3, 4]",
+            e: "[1, 2, 5, 3, 4]\n[1, 2, 5, 3, 4]"
+        },
+        correctAnswer: 'd',
+        level: 'State',
+        tags: ["Data Structures", "Tracing"]
+    },
+    {
+        question: "Which of the following represents the output of the code segment shown on the right?",
+        code: `
+char[] c = {'c','o','m','p','u','t','e','r'};
+"science".getChars(3, 6, c, 2);
+for(char ch:c)
+out.print(ch);
+        `,
+        answers: {
+            a: "coencter",
+            b: "scputce",
+            c: "coenceer",
+            d: "sciputerence",
+            e: "coencmputer"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["String"]
+    },
+    {
+        question: "What is the output of the code segment shown on the right?",
+        code: `
+double x = 6.0,y = 8.0;
+double z = Math.hypot(x, y);
+out.print(z);
+        `,
+        answers: {
+            a: "100.0",
+            b: "10.0",
+            c: "5.0",
+            d: "12.0",
+            e: "2.0"
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Numbers"]
+    },
+    {
+        question: "Which of the following represents the simplest form of the Boolean expression shown on the right?",
+        code: `
+AA ∗ BB + AA ∗ (BB + CC) + BB ∗ (BB + CC)
+        `,
+        answers: {
+            a: "BB ∗ AA + CC",
+            b: "AA + BB + CC",
+            c: "AA + BB ∗ AA + CC",
+            d: "AA ∗ BB + AA ∗ CC",
+            e: "BB + AA ∗ CC"
+        },
+        correctAnswer: 'e',
+        level: 'State',
+        tags: ["Boolean"]
+    },
+    {
+        question: "What is the output of the main method shown to the right?",
+        code: `
+public static void main(String[] args) {
+    out.print(method1("193"));
+}
+
+public static int method1(String s) {
+    int x = 0;
+    for(int i = 0; i < s.length(); i++) {
+        char c = s.charAt(i);
+        x = x * 16 + method2(c);
+    }
+    return x;
+}
+
+public static int method2(char c) {
+    if(c >= 65 && c <= 70)
+        return 10 + c - 65;
+    else
+        return c - 48;
+}
+        `,
+        answers: {
+            a: "402",
+            b: "403",
+            c: "202",
+            d: "Correct Answer not shown.",
+            e: "Error. The code will not compile."
+        },
+        correctAnswer: 'b',
+        level: 'State',
+        tags: ["Tracing"]
+    },
+    {
+        question: "What is the output of the main method shown to the right?",
+        code: `
+public static void main(String[] args)
+{
+    out.print(method(416,23));
+}
+
+public static int method(int i, int j)
+{
+    if(i < j)
+        return 0;
+    else
+        return 1 + method(i - j, j);
+}
+        `,
+        answers: {
+            a: "18",
+            b: "20",
+            c: "12",
+            d: "Correct Answer not shown.",
+            e: "Error. Results in a StackOverFlowError"
+        },
+        correctAnswer: 'a',
+        level: 'State',
+        tags: ["Recursion", "Tracing"]
     },
 ];
